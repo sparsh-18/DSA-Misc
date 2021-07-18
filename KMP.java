@@ -20,6 +20,8 @@ public class KMP {
         int n = t.length;
 
         int i = 0, j = 0;
+        
+        boolean found = false;
 
         while(i<n) {
 
@@ -30,16 +32,19 @@ public class KMP {
 
             if(j == m) {
                 System.out.println("Found at index "+(i-j));
+                found = true;
                 j = lps[j-1];
             }
 
-            else if(j<m && pat[j] != t[i]) {
+            else if(i<n && pat[j] != t[i]) {
                 if(j!=0) 
                     j=lps[j-1];
 
                 else i++;
             }
         }
+        if(!found)
+            System.out.println("Not Found");
     }
 
     private static void computeLps(char[] pat, int m, int[] lps) {
