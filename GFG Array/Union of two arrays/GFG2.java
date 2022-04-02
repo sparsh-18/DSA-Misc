@@ -1,9 +1,8 @@
 // { Driver Code Starts
 //Initial Template for Java
 
-import java.io.*;
 import java.util.*;
-class GFG {
+class GFG2 {
 	public static void main (String[] args) {
 	    
 	    //Taking input using class Scanner
