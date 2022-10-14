@@ -85,6 +85,9 @@ class Complete{
         
         // return sum;
         
+        
+        // O(max + highest_freq)
+        
         int max = Integer.MIN_VALUE;
         for(int e: arr)
             max = Math.max(max, e);
@@ -94,9 +97,9 @@ class Complete{
         for(int e: arr)
             map[e]++;
         
-        int count = 0, i = max, sum = 0;
+        int i = max, sum = 0;
         
-        while(count <= n && i >= 0) {
+        while(i >= 0) {
             int k = map[i];
             
             if(k > 0) {
