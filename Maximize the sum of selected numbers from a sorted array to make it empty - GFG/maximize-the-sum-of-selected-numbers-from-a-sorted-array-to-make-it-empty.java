@@ -56,29 +56,59 @@ class Complete{
     // Function for finding maximum and value pair
     public static int maximizeSum (int arr[], int n) {
         //Complete the function
-        Arrays.sort(arr);
         
-        HashMap<Integer, Integer> map = new HashMap<>();
+        // // O(nlogn)
+        // Arrays.sort(arr);
         
-        for(int e: arr) {
-            if(map.containsKey(e))
-                map.put(e, map.get(e)+1);
-            else
-                map.put(e, 1);
-        }
+        // HashMap<Integer, Integer> map = new HashMap<>();
         
-        int sum = 0;
+        // for(int e: arr) {
+        //     if(map.containsKey(e))
+        //         map.put(e, map.get(e)+1);
+        //     else
+        //         map.put(e, 1);
+        // }
         
-        for(int i=n-1; i>=0; i--) {
-            int v = map.get(arr[i]);
+        // int sum = 0;
+        
+        // for(int i=n-1; i>=0; i--) {
+        //     int v = map.get(arr[i]);
             
-            if(v > 0) {
-                sum += (arr[i] * v);
-                map.put(arr[i], 0);
+        //     if(v > 0) {
+        //         sum += (arr[i] * v);
+        //         map.put(arr[i], 0);
                 
-                if(map.containsKey(arr[i] - 1))
-                    map.put(arr[i]-1, (map.get(arr[i]-1) - v));
+        //         if(map.containsKey(arr[i] - 1))
+        //             map.put(arr[i]-1, (map.get(arr[i]-1) - v));
+        //     }
+        // }
+        
+        // return sum;
+        
+        int max = Integer.MIN_VALUE;
+        for(int e: arr)
+            max = Math.max(max, e);
+            
+        int map[] = new int[max+1];
+        
+        for(int e: arr)
+            map[e]++;
+        
+        int count = 0, i = max, sum = 0;
+        
+        while(count <= n && i >= 0) {
+            int k = map[i];
+            
+            if(k > 0) {
+                sum += (k*i);
+                
+                map[i] = 0;
+                
+                if(map[i-1] > 0)
+                    map[i-1] -= k;
             }
+            
+            i--;
         }
         
         return sum;
