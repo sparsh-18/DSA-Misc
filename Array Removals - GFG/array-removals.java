@@ -37,27 +37,46 @@ class Solution {
         
         Arrays.sort(arr);
         
-        int dp[][] = new int[n][n];
+        // //  O(n^2) both T.C. and S.C.
         
-        for(int d=1; d<n; d++) {
-            int i=0, j=i+d;
-            while(i<n && j<n){
-                int left = 1 + dp[i][j-1];
-                int bottom = 1 + dp[i+1][j];
-                int diag = 2 + dp[i+1][j-1];
+        // int dp[][] = new int[n][n];
+        
+        // for(int d=1; d<n; d++) {
+        //     int i=0, j=i+d;
+        //     while(i<n && j<n){
+        //         int left = 1 + dp[i][j-1];
+        //         int bottom = 1 + dp[i+1][j];
+        //         int diag = 2 + dp[i+1][j-1];
                 
-                int min = Math.min(left, Math.min(bottom, diag));
+        //         int min = Math.min(left, Math.min(bottom, diag));
                 
-                if(arr[j]-arr[i] <= k)
-                    min = Math.min(0, min);
+        //         if(arr[j]-arr[i] <= k)
+        //             min = Math.min(0, min);
                 
-                dp[i][j] = min;
+        //         dp[i][j] = min;
                 
-                i++;
+        //         i++;
+        //         j++;
+        //     }
+        // }
+        
+        // return dp[0][n-1];
+        
+        
+        int maxSubarrayLength = 0;
+        int j=0;
+        
+        for(int i=0; i<n; i++) {
+            int d = arr[i] - arr[j];
+            
+            while(d > k && i >= j){
                 j++;
+                d = arr[i] - arr[j];
             }
+            
+            maxSubarrayLength = Math.max(maxSubarrayLength, i-j+1);
         }
         
-        return dp[0][n-1];
+        return n - maxSubarrayLength;
     }
 }
